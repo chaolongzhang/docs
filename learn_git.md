@@ -229,6 +229,11 @@ Git还提供SVN的桥接工具`git svn`。使用方法：
 * [Git教程 - 廖雪峰的官方网站][7]
 * [Git官方Book][8]
 
+## About
+
+* 作者：张朝龙
+* GitHub: <https://github.com/chaolongzhang/>
+
 [1]: https://desktop.github.com/ 
 [2]: https://www.sourcetreeapp.com/         
 [3]: https://github.com/ 

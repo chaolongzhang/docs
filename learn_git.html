@@ -1034,6 +1034,7 @@ body .markdown-body
 <li><a href="#14-github">14. GitHub</a></li>
 <li><a href="#15-svngit">15. 从SVN到Git</a></li>
 <li><a href="#ref">Ref</a></li>
+<li><a href="#about">About</a></li>
 </ul>
 </li>
 </ul>
@@ -1094,7 +1095,7 @@ git config --global user.email sanzhang@example.com
 1. <strong>工作目录</strong>：它持有实际的文件。<br />
 2. <strong>暂存区（Index）</strong>：它像一个缓冲区域，临时保存你的改动。<br />
 3.  <strong>HEAD</strong>：它指向最后一个提交的结果。</p>
-<p><img alt="工作流" src="/Users/zcl/Desktop/gitlean/imgs/01.png" /></p>
+<p><img alt="工作流" src="/Users/zcl/Documents/gitlean/imgs/01.png" /></p>
 <p><strong>添加和提交</strong>：<br />
 1. 把工作目录的文件添加到暂存区：<code>git add &lt;finename&gt;</code> 或者<code>git add *</code>。<br />
 2. 把暂存区提交到HEAD，<code>git commit -m "代码提交信息"</code> 或者<code>git commit -am "代码提交信息"</code>。<br />
@@ -1115,22 +1116,22 @@ git config --global user.email sanzhang@example.com
 </ol>
 <h2 id="8"><a name="user-content-8" href="#8" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>8. 分支</h2>
 <p>分支可以看作是一条时间线，SVN通常只有一个分支，看起来像下面这样：</p>
-<p><img alt="SVN分支" src="/Users/zcl/Desktop/gitlean/imgs/02.png" /></p>
+<p><img alt="SVN分支" src="/Users/zcl/Documents/gitlean/imgs/02.png" /></p>
 <p>所有的开发者都在同一个分支开发。在开发的过程中可能出现如下问题：</p>
 <ol>
 <li>假设开发一个新功能需要两周才能完成，第一周写了50%的代码，由于代码不完整，现在提交会导致别人没法干活。</li>
 <li>项目第一期已经发布，第二期也开发了一半。但是发现第一期的代码存在一个严重的漏洞。SVN的解决办法：导出第一期发布的版本，修改代码，然后重复发布。在最新的版本也需要进行一次修改。</li>
 </ol>
 <p>Git的分支可以完美解决这类问题。在创建Git仓库时会创建一个默认的分支<code>master</code>，也称主分支。只有<code>master</code>分支的Git仓库看起来和SVN差不多。</p>
-<p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/03.png" /></p>
+<p><img alt="Git分支" src="/Users/zcl/Documents/gitlean/imgs/03.png" /></p>
 <p>Git可以创建一个新的分支（比如dev），然后把HEAD指向新分支，如下图：</p>
-<p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/04.png" /></p>
+<p><img alt="Git分支" src="/Users/zcl/Documents/gitlean/imgs/04.png" /></p>
 <p>这时对工作区的修改和提交就针对dev分支了，<code>master</code>分支不变。</p>
-<p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/05.png" /></p>
+<p><img alt="Git分支" src="/Users/zcl/Documents/gitlean/imgs/05.png" /></p>
 <p>当<code>dev</code>分支开发完成了，就可以把<code>dev</code>合并到<code>master</code>上：</p>
-<p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/06.png" /></p>
+<p><img alt="Git分支" src="/Users/zcl/Documents/gitlean/imgs/06.png" /></p>
 <p>当项目结束后，还可以删除<code>dev</code>分支，只剩下<code>master</code>分支。</p>
-<p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/07.png" /></p>
+<p><img alt="Git分支" src="/Users/zcl/Documents/gitlean/imgs/07.png" /></p>
 <p><strong><em>注意</em></strong>：在一个Git仓库中，<code>master</code>分支通常指向稳定的版本，而开发在<code>dev</code>分支上进行。</p>
 <p><strong>分支命令</strong>：</p>
 <ol>
@@ -1162,7 +1163,7 @@ git merge dev          # 把dev合并到master
 <li>每个开发中在<code>dev</code>分支建立自己的开发分支（如<code>dev-zcl</code>），在自己的开发分支上开发，时不时往<code>dev</code>分支合并就可以了,，自己的开发分支只保存在开发中自己的电脑，不需要提交到服务器的仓库。</li>
 <li>团队合作的分支看起来像这样：</li>
 </ol>
-<p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/08.png" /></p>
+<p><img alt="Git分支" src="/Users/zcl/Documents/gitlean/imgs/08.png" /></p>
 <h2 id="10-tag"><a name="user-content-10-tag" href="#10-tag" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>10. 标签 tag</h2>
 <p>发布版本时，通常也在版本库中打一个标签（tag），标签是版本库中的一个快照，方便以后取出这个版本。</p>
 <ol>
@@ -1246,4 +1247,9 @@ git push origin :refs/tags/&lt;tag_name&gt;
 <li><a href="http://rogerdudler.github.io/git-guide/index.zh.html">git - 简明指南</a></li>
 <li><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程 - 廖雪峰的官方网站</a></li>
 <li><a href="https://git-scm.com/book/zh/v2">Git官方Book</a></li>
+</ul>
+<h2 id="about"><a name="user-content-about" href="#about" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>About</h2>
+<ul>
+<li>作者：张朝龙</li>
+<li>GitHub: <a href="https://github.com/chaolongzhang/">https://github.com/chaolongzhang/</a></li>
 </ul></article></body></html>
