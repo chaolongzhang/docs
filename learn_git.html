@@ -1021,7 +1021,7 @@ body .markdown-body
 <li><a href="#1-vcs">1. 版本控制系统（VCS）</a></li>
 <li><a href="#2-git">2. Git简史</a></li>
 <li><a href="#3-git-">3. Git使用 - 安装</a></li>
-<li><a href="#4-git-">4. Git使用 - 初次使用的配置</a></li>
+<li><a href="#4-git-">4. Git使用 - 首次使用的配置</a></li>
 <li><a href="#5-git-">5. Git使用 - 基本操作</a></li>
 <li><a href="#6-git-">6. Git使用 - 工作流</a></li>
 <li><a href="#7-git-">7. Git使用 - 版本管理</a></li>
@@ -1042,7 +1042,7 @@ body .markdown-body
 <ol>
 <li>本地版本控制系统。</li>
 <li>集中化的版本控制系统。如Subversion（SVN）。集中式版本控制系统由一个单一的服务器管理软件的版本，所有的人都必须通过这个台服务器取出文件或提交更新。缺点是当服务器出现故障时，那么开发者就没法进行协作了。如果服务器磁盘损坏，那么版本的历史记录将会丢失。</li>
-<li>分布式版本控制系统。如Git。每一个节点都保存了完整的代码创库镜像，同时每一个客户端都可以作为服务器。当服务器出现故障时，可以从任意一个镜像恢复，同时协助也可以继续进行。分布式版本控制系统其实可以不需要一个单独的服务器，服务器的存在只是方便大家访问以及代码的管理。</li>
+<li>分布式版本控制系统。如Git。每一个节点都保存了完整的代码仓库镜像，同时每一个客户端都可以作为服务器。当服务器出现故障时，可以从任意一个镜像恢复，同时协作也可以继续进行。分布式版本控制系统其实可以不需要一个单独的服务器，服务器的存在只是方便大家访问以及代码的管理。</li>
 </ol>
 <h2 id="2-git"><a name="user-content-2-git" href="#2-git" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. Git简史</h2>
 <ol>
@@ -1055,13 +1055,13 @@ body .markdown-body
         3. 对非线性开发模式的强力支撑（允许成千上万个并行级开发的分支）。<br />
         4. 完全分布式。<br />
         5. 有能力高效管理类似Linux内核一样的超大规模的项目（速度和数据量）。</li>
-<li>Linus Torvalds花了一个星期写出了Git的最初版本。</li>
+<li>Linus Torvalds（林纳斯·托瓦兹，Linux之父）花了一个星期写出了Git的最初版本。</li>
 </ol>
 <h2 id="3-git-"><a name="user-content-3-git-" href="#3-git-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. Git使用 - 安装</h2>
 <ol>
-<li>安装Git</li>
-<li>Mac、Linux自带Git。</li>
-<li>Windows:<ul>
+<li>安装Git<br />
+<em>. Mac、Linux自带Git。<br />
+</em>. Windows:<ul>
 <li>从Git官方下载安装。</li>
 <li>安装<a href="https://desktop.github.com/">GitHub for Windows</a>。该安装程序包含图形化和命令行版本的Git。<br />
 <strong>注意</strong>：区分Git和Git图形化客户端。</li>
@@ -1069,26 +1069,28 @@ body .markdown-body
 </li>
 <li>安装图形化客户端，推荐使用<a href="https://www.sourcetreeapp.com/">SourceTree</a>。</li>
 </ol>
-<h2 id="4-git-"><a name="user-content-4-git-" href="#4-git-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4. Git使用 - 初次使用的配置</h2>
+<h2 id="4-git-"><a name="user-content-4-git-" href="#4-git-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4. Git使用 - 首次使用的配置</h2>
 <p>在首次使用Git前需要进行一个配置，定制Git环境。Git自带<code>git config</code>命令来帮助设置控制Git的环境。其中最重要的是用户信息，用户信息标识用户的身份，Git在提交时会使用这些信息，提交之后不可更改。</p>
 <p><pre><code class="shell">git config --global user.name &quot;San Zhang&quot;
 git config --global user.email sanzhang@example.com
 </code></pre><br />
-使用<code>git config --list</code>可以查看当前的配置。</p>
-<p>使用<code>git help xxx</code>可以获得帮助信息（类似于Linux的<code>man</code>命令），如<code>git help config</code>。</p>
+使用<code>git config --list</code>可以查看当前的配置。<br />
+使用<code>git help xxx</code>可以获得帮助信息（类似于Linux的<code>man</code>命令），如<code>git help config</code>。</p>
 <h2 id="5-git-"><a name="user-content-5-git-" href="#5-git-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>5. Git使用 - 基本操作</h2>
 <ol>
-<li><strong>创建新创库</strong>。创建或进入一个目录，然后执行<code>git init</code>以创建一个新的git创库。这个命令会在当前目录创建一个<code>.git</code>的目录，这个目录就是完整的创库镜像。</li>
-<li><strong>检查创库</strong>。检查创库使用命令<code>git clone</code>：<ol>
-<li>从本地创库检查：<code>git clone /path/to/respository</code>。</li>
-<li>从远程创库检查：<br />
-        1. ssh: <code>git clone username@host:/path/to/respository</code><br />
-        2. http/https: <code>git clone https://github.com/respository_name.git</code></li>
+<li><strong>创建新仓库</strong>。创建或进入一个目录，然后执行<code>git init</code>以创建一个新的git仓库。这个命令会在当前目录创建一个<code>.git</code>的目录，这个目录就是完整的仓库镜像。</li>
+<li><strong>检查仓库</strong>。检查仓库使用命令<code>git clone</code>：<ol>
+<li>从本地仓库检查：<code>git clone /path/to/respository</code>。</li>
+<li>从远程仓库检查：<ul>
+<li>ssh: <code>git clone username@host:/path/to/respository</code></li>
+<li>http/https: <code>git clone https://github.com/respository_name.git</code></li>
+</ul>
+</li>
 </ol>
 </li>
 </ol>
 <h2 id="6-git-"><a name="user-content-6-git-" href="#6-git-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>6. Git使用 - 工作流</h2>
-<p>git创库包括三个部分：<br />
+<p>git仓库包括三个部分：<br />
 1. <strong>工作目录</strong>：它持有实际的文件。<br />
 2. <strong>暂存区（Index）</strong>：它像一个缓冲区域，临时保存你的改动。<br />
 3.  <strong>HEAD</strong>：它指向最后一个提交的结果。</p>
@@ -1096,10 +1098,10 @@ git config --global user.email sanzhang@example.com
 <p><strong>添加和提交</strong>：<br />
 1. 把工作目录的文件添加到暂存区：<code>git add &lt;finename&gt;</code> 或者<code>git add *</code>。<br />
 2. 把暂存区提交到HEAD，<code>git commit -m "代码提交信息"</code> 或者<code>git commit -am "代码提交信息"</code>。<br />
-<strong><em>注意</em></strong>：提交到HEAD时所有的更新都只保存在本地的镜像中，还没有到远程创库。<br />
-3. 推送改动，把本地创库的HEAD提交到远程创库：<code>git push origin master</code>，其中<code>origin</code>是远程创库名，<code>master</code>是分支名称，可以把<code>master</code>换成你想要推送的任何分支。当设置了默认推送的分支后，直接使用使用命令<code>git push</code>就可以完成推送。</p>
+<strong><em>注意</em></strong>：提交到HEAD时所有的更新都只保存在本地的镜像中，还没有到远程仓库。<br />
+3. 推送改动，把本地仓库的HEAD提交到远程仓库：<code>git push origin master</code>，其中<code>origin</code>是远程仓库名，<code>master</code>是分支名称，可以把<code>master</code>换成你想要推送的任何分支。当设置了默认推送的分支后，直接使用使用命令<code>git push</code>就可以完成推送。</p>
 <p><strong>更新与合并</strong>：<br />
-更新本地创库：<code>git pull</code>。<code>pull</code>命令会从服务器获取（fetch）最新的改动并和本地创库进行合并（merge），git会尝试自动合并改动，当无法自动合并时就会出现冲突（与SVN合并类似），这时就需要手动修改这些冲突。解决冲突后，需要执行如下命令标记合并成功：<code>git add &lt;filename&gt;</code>。</p>
+更新本地仓库：<code>git pull</code>。<code>pull</code>命令会从服务器获取（fetch）最新的改动并和本地仓库进行合并（merge），git会尝试自动合并改动，当无法自动合并时就会出现冲突（与SVN合并类似），这时就需要手动修改这些冲突。解决冲突后，需要执行如下命令标记合并成功：<code>git add &lt;filename&gt;</code>。</p>
 <h2 id="7-git-"><a name="user-content-7-git-" href="#7-git-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>7. Git使用 - 版本管理</h2>
 <ol>
 <li>查看工作区的状态， <code>git status</code></li>
@@ -1119,7 +1121,7 @@ git config --global user.email sanzhang@example.com
 <li>假设开发一个新功能需要两周才能完成，第一周写了50%的代码，由于代码不完整，现在提交会导致别人没法干活。</li>
 <li>项目第一期已经发布，第二期也开发了一半。但是发现第一期的代码存在一个严重的漏洞。SVN的解决办法：导出第一期发布的版本，修改代码，然后重复发布。在最新的版本也需要进行一次修改。</li>
 </ol>
-<p>Git的分支可以完美解决这类问题。在创建Git创库时会创建一个默认的分支<code>master</code>，也称主分支。只有<code>master</code>分支的Git创库看起来和SVN差不多。</p>
+<p>Git的分支可以完美解决这类问题。在创建Git仓库时会创建一个默认的分支<code>master</code>，也称主分支。只有<code>master</code>分支的Git仓库看起来和SVN差不多。</p>
 <p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/03.png" /></p>
 <p>Git可以创建一个新的分支（比如dev），然后把HEAD指向新分支，如下图：</p>
 <p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/04.png" /></p>
@@ -1129,35 +1131,35 @@ git config --global user.email sanzhang@example.com
 <p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/06.png" /></p>
 <p>当项目结束后，还可以删除<code>dev</code>分支，只剩下<code>master</code>分支。</p>
 <p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/07.png" /></p>
-<p><strong><em>注意</em></strong>：在一个Git创库中，<code>master</code>分支通常指向稳定的版本，而开发在<code>dev</code>分支上进行。</p>
+<p><strong><em>注意</em></strong>：在一个Git仓库中，<code>master</code>分支通常指向稳定的版本，而开发在<code>dev</code>分支上进行。</p>
 <p><strong>分支命令</strong>：</p>
 <ol>
 <li>
 <p>创建并切换到分支：<code>git checkout -b &lt;branch_name&gt;</code>，这个命令实际执行了两个命令：</p>
 <p><pre><code class="shell">git branch &lt;branch_name&gt;      # 创建分支branch_name
-git checkout &lt;bracnch_name&gt; # 切换草branch_name分支
+git checkout &lt;bracnch_name&gt;   # 切换草branch_name分支
 </code></pre><br />
 2. 列出所有的分支：<code>git branch</code><br />
 3. 合并分支，把<code>dev</code>分支合并到<code>master</code>分支：</p>
 <pre><code class="shell">git checkout master    # 切换到主分支
-git merge dev             # 把dev合并到master
+git merge dev          # 把dev合并到master
 </code></pre>
 
 </li>
 <li>
 <p>删除分支：<code>git branch -d &lt;branch_name&gt;</code>；强行删除分支：<code>git branch -D &lt;branch_name&gt;</code>。</p>
 </li>
-<li>推送本地分支到远程创库：<code>git push origin &lt;branch_name&gt;</code></li>
+<li>推送本地分支到远程仓库：<code>git push origin &lt;branch_name&gt;</code></li>
 <li>创建本地分支并与远程分支建立链接：<code>git checkout -b &lt;branch_name&gt; origin/&lt;branch_name&gt;</code></li>
 <li>设置本地分支与远程分支的链接：<code>git branch --set-upstream &lt;branch_name&gt; origin/&lt;branch_name&gt;</code></li>
-<li>从远程创库更新分支：<code>git pull</code></li>
+<li>从远程仓库更新分支：<code>git pull</code></li>
 </ol>
 <h2 id="9"><a name="user-content-9" href="#9" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>9. 分支管理策略</h2>
 <p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
 <ol>
 <li><code>master</code>分支应该是非常稳定的，也就是仅用来发布新的版本，平时不在上面开发。</li>
 <li><code>dev</code>用于开发，<code>dev</code>分支是不稳定的，当开发完成一个版本时（比如1.0版本），把<code>dev</code>合并到<code>master</code>。</li>
-<li>每个开发中在<code>dev</code>分支建立自己的开发分支（如<code>dev-zcl</code>），在自己的开发分支上开发，时不时往<code>dev</code>分支合并就可以了,，自己的开发分支只保存在开发中自己的电脑，不需要提交到服务器的创库。</li>
+<li>每个开发中在<code>dev</code>分支建立自己的开发分支（如<code>dev-zcl</code>），在自己的开发分支上开发，时不时往<code>dev</code>分支合并就可以了,，自己的开发分支只保存在开发中自己的电脑，不需要提交到服务器的仓库。</li>
 <li>团队合作的分支看起来像这样：</li>
 </ol>
 <p><img alt="Git分支" src="/Users/zcl/Desktop/gitlean/imgs/08.png" /></p>
@@ -1185,7 +1187,7 @@ git push origin :refs/tags/&lt;tag_name&gt;
 <li><a href="https://gogs.io/">Gogs</a></li>
 </ul>
 <h2 id="12-git"><a name="user-content-12-git" href="#12-git" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>12. Git免密码登陆</h2>
-<p>使用ssh协议可以实现免密码登陆，实现创库clone和push等操作。</p>
+<p>使用ssh协议可以实现免密码登陆，实现仓库clone和push等操作。</p>
 <ol>
 <li>生成秘钥。Mac/Linux使用终端，Windows使用Git Bash，执行命令：</li>
 </ol>
@@ -1197,12 +1199,12 @@ git push origin :refs/tags/&lt;tag_name&gt;
 <li>把<code>id_rsa.pub</code>文件内容拷贝到Git服务器，具体参考不同服务器的说明。</li>
 </ol>
 <h2 id="13-git"><a name="user-content-13-git" href="#13-git" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>13. Git钩子</h2>
-<p>Git钩子能在特点的动作发生时触发自定义脚本，钩子都被存在Git目录下的<code>hooks</code>子目录中，在初始化创库的时候就会创建这个目录，并且会创建一些示例脚本。钩子的脚本可以使用任何可执行的脚本语言编写，比如shell、Python、Ruby和Perl等。</p>
+<p>Git钩子能在特点的动作发生时触发自定义脚本，钩子都被存在Git目录下的<code>hooks</code>子目录中，在初始化仓库的时候就会创建这个目录，并且会创建一些示例脚本。钩子的脚本可以使用任何可执行的脚本语言编写，比如shell、Python、Ruby和Perl等。</p>
 <p>Git钩子包括客户端和服务器钩子。客户端钩子分为三种：提交工作流钩子、电子邮件工作流钩子和其它钩子。<br />
 1. 提交工作流钩子：<br />
-<code>pre-commit</code>钩子在键入提交信息前运行。它用于检查即将提交的快照，例如，检查是否有所遗漏，确保测试运行，以及核查代码。 如果该钩子以非零值退出，Git 将放弃此次提交。<br />
-<code>prepare-commit-msg</code>钩子在启动提交信息编辑器之前，默认信息被创建之后运行。 <br />
-<code>commit-msg</code>钩子接收一个参数，此参数即上文提到的，存有当前提交信息的临时文件的路径。 如果该钩子脚本以非零值退出，Git 将放弃提交，因此，可以用来在提交通过前验证项目状态或提交信息。 <br />
+  * <code>pre-commit</code>钩子在键入提交信息前运行。它用于检查即将提交的快照，例如，检查是否有所遗漏，确保测试运行，以及核查代码。 如果该钩子以非零值退出，Git 将放弃此次提交。<br />
+  * <code>prepare-commit-msg</code>钩子在启动提交信息编辑器之前，默认信息被创建之后运行。 <br />
+  * <code>commit-msg</code>钩子接收一个参数，此参数即上文提到的，存有当前提交信息的临时文件的路径。 如果该钩子脚本以非零值退出，Git 将放弃提交，因此，可以用来在提交通过前验证项目状态或提交信息。 <br />
 <code>post-commit</code>钩子在整个提交过程完成后运行</p>
 <ol>
 <li>
@@ -1210,9 +1212,9 @@ git push origin :refs/tags/&lt;tag_name&gt;
 </li>
 <li>
 <p>其它客户端钩子<br />
-<code>pre-rebase</code>钩子运行于变基之前，以非零值退出可以中止变基的过程。<br />
-<code>post-rewrite</code> 钩子被那些会替换提交记录的命令调用.<br />
-    在<code>git checkout</code>成功运行后，<code>post-checkout</code>钩子会被调用。你可以根据你的项目环境用它调整你的工作目录。 <br />
+  * <code>pre-rebase</code>钩子运行于变基之前，以非零值退出可以中止变基的过程。<br />
+  * <code>post-rewrite</code> 钩子被那些会替换提交记录的命令调用.<br />
+  * 在<code>git checkout</code>成功运行后，<code>post-checkout</code>钩子会被调用。你可以根据你的项目环境用它调整你的工作目录。 <br />
     在<code>git merge</code>成功运行后，<code>post-merge</code> 钩子会被调用。<br />
 <code>pre-push</code>钩子会在<code>git push</code>运行期间， 更新了远程引用但尚未传送对象时被调用。 </p>
 </li>
@@ -1222,7 +1224,7 @@ git push origin :refs/tags/&lt;tag_name&gt;
     2. <code>update</code>：<code>update</code>脚本和<code>pre-receive</code>脚本十分类似，不同之处在于它会为每一个准备更新的分支各运行一次。 假如推送者同时向多个分支推送内容，pre-receive 只运行一次，相比之下 update 则会为每一个被推送的分支各运行一次。 <br />
     3. <code>post-receive</code>：<code>post-receive</code>挂钩在整个过程完结以后运行，可以用来更新其他系统服务或者通知用户，可以用于自动发布。</p>
 <h2 id="14-github"><a name="user-content-14-github" href="#14-github" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>14. GitHub</h2>
-<p><a href="">GitHub</a>是一个远程创库服务器，也是一个开源社区，通过GitHub，既可以参与别人的项目，也可以让别人参与你的项目。GitHub的使用：</p>
+<p><a href="">GitHub</a>是一个远程仓库服务器，也是一个开源社区，通过GitHub，既可以参与别人的项目，也可以让别人参与你的项目。GitHub的使用：</p>
 <ol>
 <li>注册账号。</li>
 <li>设置ssh密钥（可选）。</li>
@@ -1234,8 +1236,8 @@ git push origin :refs/tags/&lt;tag_name&gt;
 <h2 id="15-svngit"><a name="user-content-15-svngit" href="#15-svngit" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>15. 从SVN到Git</h2>
 <p>Git还提供SVN的桥接工具<code>git svn</code>。使用方法：</p>
 <ol>
-<li>检出创库：<code>git svn clone --username &lt;username&gt; http://svnserver/project/trunk</code>。</li>
-<li>检出之后就会得到一个Git创库镜像，可以使用<code>git add</code>和<code>git commit</code>等命令。</li>
+<li>检出仓库：<code>git svn clone --username &lt;username&gt; http://svnserver/project/trunk</code>。</li>
+<li>检出之后就会得到一个Git仓库镜像，可以使用<code>git add</code>和<code>git commit</code>等命令。</li>
 <li>提交代码到SVN服务：<code>git svn dcommit</code>，<strong>不是</strong><code>push</code>。</li>
 <li>同步远程svn服务器：<code>git svn rebase</code>。</li>
 </ol>
