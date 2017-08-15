@@ -1,5 +1,7 @@
 # Git 基础指南
 
+[TOC]
+
 ## 1. 版本控制系统（VCS）
 
   1. 本地版本控制系统。
@@ -49,7 +51,8 @@ git config --global user.email sanzhang@example.com
     2. 从远程创库检查：
             1. ssh: `git clone username@host:/path/to/respository`
             2. http/https: `git clone https://github.com/respository_name.git`
- 
+
+
 ## 6. Git使用 - 工作流
 
 git创库包括三个部分：
@@ -213,7 +216,14 @@ Git钩子包括客户端和服务器钩子。客户端钩子分为三种：提�
 4. `git clone git@github.com/xxxx.git`
 5. `push`项目。
 6. 如果是`Fork`别人的项目，还可以发起一个`pull request`向对方贡献代码。当然，对方是否接受你的`pull request`就不一定。
-7. 整个过程如下：
+
+## 15. 从SVN到Git
+Git还提供SVN的桥接工具`git svn`。使用方法：
+
+1. 检出创库：`git svn clone --username <username> http://svnserver/project/trunk`。
+2. 检出之后就会得到一个Git创库镜像，可以使用`git add`和`git commit`等命令。
+3. 提交代码到SVN服务：`git svn dcommit`，**不是**`push`。
+4. 同步远程svn服务器：`git svn rebase`。
 
 ## Ref
 
