@@ -50,6 +50,7 @@ git config --global user.email sanzhang@example.com
     2. 从远程仓库检查：
           * ssh: `git clone username@host:/path/to/respository`
           * http/https: `git clone https://github.com/respository_name.git`
+3. 在目录下添加一个`.gitignore`可以设置需要忽略的文件。
 
 ## 6. Git使用 - 工作流
 
@@ -121,6 +122,7 @@ Git可以创建一个新的分支（比如dev），然后把HEAD指向新分支�
     git branch <branch_name>      # 创建分支branch_name
     git checkout <bracnch_name>   # 切换草branch_name分支
     ```
+
 2. 列出所有的分支：`git branch`
 3. 合并分支，把`dev`分支合并到`master`分支：
     
@@ -140,7 +142,7 @@ Git可以创建一个新的分支（比如dev），然后把HEAD指向新分支�
 
 1. `master`分支应该是非常稳定的，也就是仅用来发布新的版本，平时不在上面开发。
 2. `dev`用于开发，`dev`分支是不稳定的，当开发完成一个版本时（比如1.0版本），把`dev`合并到`master`。
-3. 每个开发中在`dev`分支建立自己的开发分支（如`dev-zcl`），在自己的开发分支上开发，时不时往`dev`分支合并就可以了,，自己的开发分支只保存在开发中自己的电脑，不需要提交到服务器的仓库。
+3. 每个开发中在`dev`分支建立自己的开发分支（如`dev-zcl`），在自己的开发分支上开发，时不时往`dev`分支合并就可以了。自己的开发分支只保存在开发中自己的电脑，不需要提交到服务器的仓库。
 4. 团队合作的分支看起来像这样：
 
 ![Git分支](./imgs/08.png)
@@ -173,11 +175,11 @@ Git可以创建一个新的分支（比如dev），然后把HEAD指向新分支�
 
 1. 生成秘钥。Mac/Linux使用终端，Windows使用Git Bash，执行命令：
 
-```shell
-ssh-keygen -t rsa -C "your.email@example" -b 4096
-```
+  ```shell
+  ssh-keygen -t rsa -C "your.email@example" -b 4096
+  ```
 
-上面的命令会生成一个密钥对，保存在~/.ssh。
+   上面的命令会生成一个密钥对，保存在~/.ssh。
 
 2. 把`id_rsa.pub`文件内容拷贝到Git服务器，具体参考不同服务器的说明。
 
@@ -186,13 +188,13 @@ Git钩子能在特点的动作发生时触发自定义脚本，钩子都被存�
 
 Git钩子包括客户端和服务器钩子。客户端钩子分为三种：提交工作流钩子、电子邮件工作流钩子和其它钩子。
 1. 提交工作流钩子：
-  * `pre-commit`钩子在键入提交信息前运行。它用于检查即将提交的快照，例如，检查是否有所遗漏，确保测试运行，以及核查代码。 如果该钩子以非零值退出，Git 将放弃此次提交。
-  * `prepare-commit-msg`钩子在启动提交信息编辑器之前，默认信息被创建之后运行。 
-  * `commit-msg`钩子接收一个参数，此参数即上文提到的，存有当前提交信息的临时文件的路径。 如果该钩子脚本以非零值退出，Git 将放弃提交，因此，可以用来在提交通过前验证项目状态或提交信息。 
+
+    * `pre-commit`钩子在键入提交信息前运行。它用于检查即将提交的快照，例如，检查是否有所遗漏，确保测试运行，以及核查代码。 如果该钩子以非零值退出，Git 将放弃此次提交。
+    * `prepare-commit-msg`钩子在启动提交信息编辑器之前，默认信息被创建之后运行。 
+    * `commit-msg`钩子接收一个参数，此参数即上文提到的，存有当前提交信息的临时文件的路径。 如果该钩子脚本以非零值退出，Git 将放弃提交，因此，可以用来在提交通过前验证项目状态或提交信息。 
     `post-commit`钩子在整个提交过程完成后运行
 
 2. 电子邮件工作流钩子
-
 3. 其它客户端钩子
   * `pre-rebase`钩子运行于变基之前，以非零值退出可以中止变基的过程。
   * `post-rewrite` 钩子被那些会替换提交记录的命令调用.
@@ -201,9 +203,10 @@ Git钩子包括客户端和服务器钩子。客户端钩子分为三种：提�
     `pre-push`钩子会在`git push`运行期间， 更新了远程引用但尚未传送对象时被调用。 
 
 系统管理员可以使用若干服务器端的钩子对项目强制执行各种类型的策略。 这些钩子脚本在推送到服务器之前和之后运行。 推送到服务器前运行的钩子可以在任何时候以非零值退出，拒绝推送并给客户端返回错误消息，还可以依你所想设置足够复杂的推送策略。
-    1. `pre-receive`：处理来自客户端的推送操作时，最先被调用的脚本是 pre-receive。
-    2. `update`：`update`脚本和`pre-receive`脚本十分类似，不同之处在于它会为每一个准备更新的分支各运行一次。 假如推送者同时向多个分支推送内容，pre-receive 只运行一次，相比之下 update 则会为每一个被推送的分支各运行一次。 
-    3. `post-receive`：`post-receive`挂钩在整个过程完结以后运行，可以用来更新其他系统服务或者通知用户，可以用于自动发布。
+
+1. `pre-receive`：处理来自客户端的推送操作时，最先被调用的脚本是 pre-receive。
+2. `update`：`update`脚本和`pre-receive`脚本十分类似，不同之处在于它会为每一个准备更新的分支各运行一次。 假如推送者同时向多个分支推送内容，pre-receive 只运行一次，相比之下 update 则会为每一个被推送的分支各运行一次。 
+3. `post-receive`：`post-receive`挂钩在整个过程完结以后运行，可以用来更新其他系统服务或者通知用户，可以用于自动发布。
 
 ## 14. GitHub
 [GitHub]()是一个远程仓库服务器，也是一个开源社区，通过GitHub，既可以参与别人的项目，也可以让别人参与你的项目。GitHub的使用：
@@ -222,6 +225,18 @@ Git还提供SVN的桥接工具`git svn`。使用方法：
 2. 检出之后就会得到一个Git仓库镜像，可以使用`git add`和`git commit`等命令。
 3. 提交代码到SVN服务：`git svn dcommit`，**不是**`push`。
 4. 同步远程svn服务器：`git svn rebase`。
+
+## 16. 命令简化
+Git支持使用命令别名来简化命令，配置方法为`git config --global alias.<shortname> <long name>`，常用的命令别名：
+
+```shell
+git config --global alias. st status
+git config --global alias. co checkout
+git config --global alias. ci commit
+git config --global alias. br branch
+git config --global alias. unstage 'reset HEAD'
+git config --global alias. last 'log -1'
+```
 
 ## Ref
 

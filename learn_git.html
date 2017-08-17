@@ -1033,6 +1033,7 @@ body .markdown-body
 <li><a href="#13-git">13. Git钩子</a></li>
 <li><a href="#14-github">14. GitHub</a></li>
 <li><a href="#15-svngit">15. 从SVN到Git</a></li>
+<li><a href="#16">16. 命令简化</a></li>
 <li><a href="#ref">Ref</a></li>
 <li><a href="#about">About</a></li>
 </ul>
@@ -1089,6 +1090,7 @@ git config --global user.email sanzhang@example.com
 </li>
 </ol>
 </li>
+<li>在目录下添加一个<code>.gitignore</code>可以设置需要忽略的文件。</li>
 </ol>
 <h2 id="6-git-"><a name="user-content-6-git-" href="#6-git-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>6. Git使用 - 工作流</h2>
 <p>git仓库包括三个部分：<br />
@@ -1137,11 +1139,16 @@ git config --global user.email sanzhang@example.com
 <ol>
 <li>
 <p>创建并切换到分支：<code>git checkout -b &lt;branch_name&gt;</code>，这个命令实际执行了两个命令：</p>
-<p><pre><code class="shell">git branch &lt;branch_name&gt;      # 创建分支branch_name
+<pre><code class="shell">git branch &lt;branch_name&gt;      # 创建分支branch_name
 git checkout &lt;bracnch_name&gt;   # 切换草branch_name分支
-</code></pre><br />
-2. 列出所有的分支：<code>git branch</code><br />
-3. 合并分支，把<code>dev</code>分支合并到<code>master</code>分支：</p>
+</code></pre>
+
+</li>
+<li>
+<p>列出所有的分支：<code>git branch</code></p>
+</li>
+<li>
+<p>合并分支，把<code>dev</code>分支合并到<code>master</code>分支：</p>
 <pre><code class="shell">git checkout master    # 切换到主分支
 git merge dev          # 把dev合并到master
 </code></pre>
@@ -1160,7 +1167,7 @@ git merge dev          # 把dev合并到master
 <ol>
 <li><code>master</code>分支应该是非常稳定的，也就是仅用来发布新的版本，平时不在上面开发。</li>
 <li><code>dev</code>用于开发，<code>dev</code>分支是不稳定的，当开发完成一个版本时（比如1.0版本），把<code>dev</code>合并到<code>master</code>。</li>
-<li>每个开发中在<code>dev</code>分支建立自己的开发分支（如<code>dev-zcl</code>），在自己的开发分支上开发，时不时往<code>dev</code>分支合并就可以了,，自己的开发分支只保存在开发中自己的电脑，不需要提交到服务器的仓库。</li>
+<li>每个开发中在<code>dev</code>分支建立自己的开发分支（如<code>dev-zcl</code>），在自己的开发分支上开发，时不时往<code>dev</code>分支合并就可以了。自己的开发分支只保存在开发中自己的电脑，不需要提交到服务器的仓库。</li>
 <li>团队合作的分支看起来像这样：</li>
 </ol>
 <p><img alt="Git分支" src="/Users/zcl/Documents/gitlean/imgs/08.png" /></p>
@@ -1202,28 +1209,27 @@ git push origin :refs/tags/&lt;tag_name&gt;
 <h2 id="13-git"><a name="user-content-13-git" href="#13-git" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>13. Git钩子</h2>
 <p>Git钩子能在特点的动作发生时触发自定义脚本，钩子都被存在Git目录下的<code>hooks</code>子目录中，在初始化仓库的时候就会创建这个目录，并且会创建一些示例脚本。钩子的脚本可以使用任何可执行的脚本语言编写，比如shell、Python、Ruby和Perl等。</p>
 <p>Git钩子包括客户端和服务器钩子。客户端钩子分为三种：提交工作流钩子、电子邮件工作流钩子和其它钩子。<br />
-1. 提交工作流钩子：<br />
-  * <code>pre-commit</code>钩子在键入提交信息前运行。它用于检查即将提交的快照，例如，检查是否有所遗漏，确保测试运行，以及核查代码。 如果该钩子以非零值退出，Git 将放弃此次提交。<br />
-  * <code>prepare-commit-msg</code>钩子在启动提交信息编辑器之前，默认信息被创建之后运行。 <br />
-  * <code>commit-msg</code>钩子接收一个参数，此参数即上文提到的，存有当前提交信息的临时文件的路径。 如果该钩子脚本以非零值退出，Git 将放弃提交，因此，可以用来在提交通过前验证项目状态或提交信息。 <br />
-<code>post-commit</code>钩子在整个提交过程完成后运行</p>
+1. 提交工作流钩子：</p>
+<pre><code>* `pre-commit`钩子在键入提交信息前运行。它用于检查即将提交的快照，例如，检查是否有所遗漏，确保测试运行，以及核查代码。 如果该钩子以非零值退出，Git 将放弃此次提交。
+* `prepare-commit-msg`钩子在启动提交信息编辑器之前，默认信息被创建之后运行。 
+* `commit-msg`钩子接收一个参数，此参数即上文提到的，存有当前提交信息的临时文件的路径。 如果该钩子脚本以非零值退出，Git 将放弃提交，因此，可以用来在提交通过前验证项目状态或提交信息。 
+`post-commit`钩子在整个提交过程完成后运行
+</code></pre>
 <ol>
-<li>
-<p>电子邮件工作流钩子</p>
-</li>
-<li>
-<p>其它客户端钩子<br />
+<li>电子邮件工作流钩子</li>
+<li>其它客户端钩子<br />
   * <code>pre-rebase</code>钩子运行于变基之前，以非零值退出可以中止变基的过程。<br />
   * <code>post-rewrite</code> 钩子被那些会替换提交记录的命令调用.<br />
   * 在<code>git checkout</code>成功运行后，<code>post-checkout</code>钩子会被调用。你可以根据你的项目环境用它调整你的工作目录。 <br />
     在<code>git merge</code>成功运行后，<code>post-merge</code> 钩子会被调用。<br />
-<code>pre-push</code>钩子会在<code>git push</code>运行期间， 更新了远程引用但尚未传送对象时被调用。 </p>
-</li>
+<code>pre-push</code>钩子会在<code>git push</code>运行期间， 更新了远程引用但尚未传送对象时被调用。 </li>
 </ol>
-<p>系统管理员可以使用若干服务器端的钩子对项目强制执行各种类型的策略。 这些钩子脚本在推送到服务器之前和之后运行。 推送到服务器前运行的钩子可以在任何时候以非零值退出，拒绝推送并给客户端返回错误消息，还可以依你所想设置足够复杂的推送策略。<br />
-    1. <code>pre-receive</code>：处理来自客户端的推送操作时，最先被调用的脚本是 pre-receive。<br />
-    2. <code>update</code>：<code>update</code>脚本和<code>pre-receive</code>脚本十分类似，不同之处在于它会为每一个准备更新的分支各运行一次。 假如推送者同时向多个分支推送内容，pre-receive 只运行一次，相比之下 update 则会为每一个被推送的分支各运行一次。 <br />
-    3. <code>post-receive</code>：<code>post-receive</code>挂钩在整个过程完结以后运行，可以用来更新其他系统服务或者通知用户，可以用于自动发布。</p>
+<p>系统管理员可以使用若干服务器端的钩子对项目强制执行各种类型的策略。 这些钩子脚本在推送到服务器之前和之后运行。 推送到服务器前运行的钩子可以在任何时候以非零值退出，拒绝推送并给客户端返回错误消息，还可以依你所想设置足够复杂的推送策略。</p>
+<ol>
+<li><code>pre-receive</code>：处理来自客户端的推送操作时，最先被调用的脚本是 pre-receive。</li>
+<li><code>update</code>：<code>update</code>脚本和<code>pre-receive</code>脚本十分类似，不同之处在于它会为每一个准备更新的分支各运行一次。 假如推送者同时向多个分支推送内容，pre-receive 只运行一次，相比之下 update 则会为每一个被推送的分支各运行一次。 </li>
+<li><code>post-receive</code>：<code>post-receive</code>挂钩在整个过程完结以后运行，可以用来更新其他系统服务或者通知用户，可以用于自动发布。</li>
+</ol>
 <h2 id="14-github"><a name="user-content-14-github" href="#14-github" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>14. GitHub</h2>
 <p><a href="">GitHub</a>是一个远程仓库服务器，也是一个开源社区，通过GitHub，既可以参与别人的项目，也可以让别人参与你的项目。GitHub的使用：</p>
 <ol>
@@ -1242,6 +1248,16 @@ git push origin :refs/tags/&lt;tag_name&gt;
 <li>提交代码到SVN服务：<code>git svn dcommit</code>，<strong>不是</strong><code>push</code>。</li>
 <li>同步远程svn服务器：<code>git svn rebase</code>。</li>
 </ol>
+<h2 id="16"><a name="user-content-16" href="#16" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>16. 命令简化</h2>
+<p>Git支持使用命令别名来简化命令，配置方法为<code>git config --global alias.&lt;shortname&gt; &lt;long name&gt;</code>，常用的命令别名：</p>
+<pre><code class="shell">git config --global alias. st status
+git config --global alias. co checkout
+git config --global alias. ci commit
+git config --global alias. br branch
+git config --global alias. unstage 'reset HEAD'
+git config --global alias. last 'log -1'
+</code></pre>
+
 <h2 id="ref"><a name="user-content-ref" href="#ref" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Ref</h2>
 <ul>
 <li><a href="http://rogerdudler.github.io/git-guide/index.zh.html">git - 简明指南</a></li>
