@@ -1,4 +1,5 @@
-# git-learn
-learning basic ideas and commands about git.
+# docs
 
-URL: <https://chaolongzhang.github.io/git-learn/>
+lots of documents
+
+URL: <https://chaolongzhang.github.io/docs>
