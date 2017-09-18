@@ -174,6 +174,35 @@ Docker支持 64位版本CentOS 7，并且要求内核版本不低于 3.10。
 ## 六、域名和端口绑定
 ### 使用nginx反向代理
 
+1. 增加一个反向代理配置：
+
+  ```shell
+  upstream webserver{
+      server 127.0.0.1:8800;
+  }
+
+  server {
+      listen 80;
+      server_name proxy.com;
+
+      location / {
+          proxy_pass http://webserver;
+      }
+  }
+  ```
+  
+2. 在nginx的配置文件include这个配置：
+
+  ```shell
+  http {
+  
+      ...
+  
+      include /usr/local/etc/nginx/conf/proxy/*;
+  }
+  ```
+
+
 ### ngrok端口映射
 
 ## 七、自动化部署
