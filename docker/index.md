@@ -195,9 +195,7 @@ Docker支持 64位版本CentOS 7，并且要求内核版本不低于 3.10。
 
   ```shell
    http {
-  
       ...
-  
       include /usr/local/etc/nginx/conf/proxy/*;
    }
   ```
